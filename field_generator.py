@@ -3,9 +3,11 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import point
+import charg
 
-negative_el_list = [point.Point(0, 0)]
-positive_el_list = []
+negative_el_list = [charg.Charg(point.Point(0.5,0),-1),charg.Charg(point.Point(1.5,1),-1),charg.Charg(point.Point(-1,1),-1)]
+positive_el_list = [charg.Charg(point.Point(-0.5,0),1),charg.Charg(point.Point(-1.5,1),1),charg.Charg(point.Point(0,1),1),charg.Charg(point.Point(0,1),1)]
+charg_list = negative_el_list + positive_el_list
 ax = plt.gca()
 x_range = 2
 y_range = 2
@@ -29,28 +31,27 @@ def generate_field():
 
 def __draw_electric_charge():
     for negative in negative_el_list:
-        plt.plot(negative.X, negative.Y, 'bo')
+        plt.plot(negative.point.X, negative.point.Y, 'bo')
 
     for positive in positive_el_list:
-        plt.plot(positive.X, positive.Y, 'ro')
+        plt.plot(positive.point.X, positive.point.Y, 'ro')
 
 
 def __calculate_vector(destination_point):
-    for negative in negative_el_list:
-        x_dif = negative.X - destination_point.X
-        y_dif = negative.Y - destination_point.Y
+
+    list_dif_x = []
+    list_dif_y = []
+    for chrges in charg_list:
+        x_dif = (destination_point.X - chrges.point.X)*chrges.is_positive
+        y_dif = (destination_point.Y - chrges.point.Y)*chrges.is_positive
         vector_norm = __calculate_vector_norm(x_dif,y_dif)
         x_direction = x_dif / vector_norm
         y_direction = y_dif / vector_norm
         force = __calculate_force_to_vector(vector_norm)
-        dif = [x_direction*force,y_direction*force]
-
-    # for positive in positive_el_list:
-    #     x_dif = destination_point.X - positive.X
-    #     y_dif = destination_point.Y - positive.Y
-    #     vector_norm = math.sqrt(x_dif * x_dif + y_dif * y_dif)
-    #     direction = [x_dif / vector_norm, y_dif / vector_norm]
-
+        list_dif_x.append(x_direction*force)
+        list_dif_y.append(y_direction*force)
+    
+    dif = [sum(list_dif_x),sum(list_dif_y)]
     return dif
 
 
@@ -75,7 +76,7 @@ def __vector_field_generator(x_points, y_points):
 
 
 def __calculate_force_to_vector(vector_norm):
-    eps = 0.5
+    eps = 8.8
     Q = 1
     r = vector_norm
     return (1 * Q) / (4 * math.pi * eps * r)
