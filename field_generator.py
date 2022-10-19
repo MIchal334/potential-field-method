@@ -1,3 +1,5 @@
+import math
+
 import matplotlib.pyplot as plt
 import numpy as np
 import point
@@ -32,6 +34,26 @@ def __draw_electric_charge():
     for positive in positive_el_list:
         plt.plot(positive.X, positive.Y, 'ro')
 
+
+def __calculate_vector(destination_point):
+    for negative in negative_el_list:
+        x_dif = negative.X - destination_point.X
+        y_dif = negative.Y - destination_point.Y
+        vector_norm = __calculate_vector_norm(x_dif,y_dif)
+        x_direction = x_dif / vector_norm
+        y_direction = y_dif / vector_norm
+        force = __calculate_force_to_vector(vector_norm)
+        dif = [x_direction*force,y_direction*force]
+
+    # for positive in positive_el_list:
+    #     x_dif = destination_point.X - positive.X
+    #     y_dif = destination_point.Y - positive.Y
+    #     vector_norm = math.sqrt(x_dif * x_dif + y_dif * y_dif)
+    #     direction = [x_dif / vector_norm, y_dif / vector_norm]
+
+    return dif
+
+
 def __vector_field_generator(x_points, y_points):
     tempX = []
     tempY = []
@@ -43,9 +65,25 @@ def __vector_field_generator(x_points, y_points):
             Y = y_p
             tempX = np.append(tempX, [X])
             tempY = np.append(tempY, [Y])
-            dif_x = 0.1
-            dif_y = 0.1
+            direction = __calculate_vector(point.Point(X, Y))
+            dif_x = 0.1 * direction[0]
+            dif_y = 0.1 * direction[1]
             a = np.array([[dif_x, dif_y]])
             V = np.concatenate((V, a), axis=0)
     origin = np.append(origin, (tempX, tempY), axis=1)
     plt.quiver(*origin, V[:, 0], V[:, 1], scale=3)
+
+
+def __calculate_force_to_vector(vector_norm):
+    eps = 0.5
+    Q = 1
+    r = vector_norm
+    return (1 * Q) / (4 * math.pi * eps * r)
+
+
+def __calculate_distance_point_to_point(start_point, stop_point):
+    return math.sqrt((stop_point.X - start_point.X) ** 2 + (stop_point.Y - start_point.Y) ** 2)
+
+
+def __calculate_vector_norm(x_dif, y_dif):
+    return math.sqrt(x_dif ** 2 + y_dif ** 2)
