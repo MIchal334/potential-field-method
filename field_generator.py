@@ -5,8 +5,11 @@ import numpy as np
 import point
 import charg
 
-negative_el_list = [charg.Charg(point.Point(0.5,0),-1),charg.Charg(point.Point(1.5,1),-1),charg.Charg(point.Point(-1,1),-1)]
-positive_el_list = [charg.Charg(point.Point(-0.5,0),1),charg.Charg(point.Point(-1.5,1),1),charg.Charg(point.Point(0,1),1),charg.Charg(point.Point(0,1),1)]
+#negative_el_list = [charg.Charg(point.Point(0.5,0),-1),charg.Charg(point.Point(1.5,1),-1),charg.Charg(point.Point(-1,1),-1)]
+#positive_el_list = [charg.Charg(point.Point(-0.5,0),1),charg.Charg(point.Point(-1.5,1),1),charg.Charg(point.Point(0,1),1),charg.Charg(point.Point(0,1),1)]
+negative_el_list  = [charg.Charg(point.Point(0.5,0),-1)]
+positive_el_list = [charg.Charg(point.Point(-0.5,0),1)]
+
 charg_list = negative_el_list + positive_el_list
 ax = plt.gca()
 x_range = 2
@@ -47,7 +50,7 @@ def __calculate_vector(destination_point):
         vector_norm = __calculate_vector_norm(x_dif,y_dif)
         x_direction = x_dif / vector_norm
         y_direction = y_dif / vector_norm
-        force = __calculate_force_to_vector(vector_norm)
+        force = __calculate_force_to_vector(vector_norm,chrges.is_positive)
         list_dif_x.append(x_direction*force)
         list_dif_y.append(y_direction*force)
     
@@ -75,8 +78,11 @@ def __vector_field_generator(x_points, y_points):
     plt.quiver(*origin, V[:, 0], V[:, 1], scale=3)
 
 
-def __calculate_force_to_vector(vector_norm):
-    eps = 8.8
+def __calculate_force_to_vector(vector_norm,is_positive):
+    if is_positive == -1:
+    	return 0.5
+    	
+    eps = 0.8
     Q = 1
     r = vector_norm
     return (1 * Q) / (4 * math.pi * eps * r)
