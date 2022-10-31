@@ -5,15 +5,15 @@ import numpy as np
 import point
 import charg
 
-#negative_el_list = [charg.Charg(point.Point(0.5,0),-1),charg.Charg(point.Point(1.5,1),-1),charg.Charg(point.Point(-1,1),-1)]
-#positive_el_list = [charg.Charg(point.Point(-0.5,0),1),charg.Charg(point.Point(-1.5,1),1),charg.Charg(point.Point(0,1),1),charg.Charg(point.Point(0,1),1)]
-negative_el_list  = [charg.Charg(point.Point(0.5,0),-1)]
-positive_el_list = [charg.Charg(point.Point(-0.5,0),1)]
+negative_el_list = [charg.Charg(point.Point(0.5,0),-1),charg.Charg(point.Point(1.5,1),-1),charg.Charg(point.Point(-1,1),-1)]
+positive_el_list = [charg.Charg(point.Point(-0.5,0),1),charg.Charg(point.Point(-1.5,1),1),charg.Charg(point.Point(0,1),1),charg.Charg(point.Point(0,1),1)]
+# negative_el_list  = [charg.Charg(point.Point(0.5,0),-1)]
+# positive_el_list = [charg.Charg(point.Point(-0.5,0),1)]
 
 charg_list = negative_el_list + positive_el_list
 ax = plt.gca()
-x_range = 2
-y_range = 2
+x_range = 3
+y_range = 3
 squer_size = 0.2
 step = squer_size / 2
 
@@ -53,8 +53,18 @@ def __calculate_vector(destination_point):
         force = __calculate_force_to_vector(vector_norm,chrges.is_positive)
         list_dif_x.append(x_direction*force)
         list_dif_y.append(y_direction*force)
+
+
+    sum_x = sum(list_dif_x)
+    sum_y = sum(list_dif_y)
     
-    dif = [sum(list_dif_x),sum(list_dif_y)]
+    if(abs(sum_x) > squer_size*0.6 ):
+        sum_x = (abs(sum_x)/sum_x)* squer_size*0.6
+
+    if(abs(sum_y) > squer_size*0.6 ):
+        sum_y = (abs(sum_y)/sum_y)* squer_size*0.6
+
+    dif = [sum_x,sum_y]
     return dif
 
 
@@ -70,12 +80,14 @@ def __vector_field_generator(x_points, y_points):
             tempX = np.append(tempX, [X])
             tempY = np.append(tempY, [Y])
             direction = __calculate_vector(point.Point(X, Y))
-            dif_x = 0.1 * direction[0]
-            dif_y = 0.1 * direction[1]
+            dif_x = direction[0]
+            dif_y = direction[1]
             a = np.array([[dif_x, dif_y]])
             V = np.concatenate((V, a), axis=0)
+
+
     origin = np.append(origin, (tempX, tempY), axis=1)
-    plt.quiver(*origin, V[:, 0], V[:, 1], scale=3)
+    plt.quiver(*origin, V[:, 0], V[:, 1], scale=8)
 
 
 def __calculate_force_to_vector(vector_norm,is_positive):
