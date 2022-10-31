@@ -9,15 +9,16 @@ charg_list = filed_data.get_charg_list()
 squer_size = filed_data.get_squer_size()
 
 
-def calculate_vector(destination_point):
+def calculate_vector(current_point):
     list_dif_x = []
     list_dif_y = []
     for chrges in charg_list:
-        x_dif = (destination_point.X - chrges.point.X)*chrges.is_positive
-        y_dif = (destination_point.Y - chrges.point.Y)*chrges.is_positive
+        x_dif = (current_point.X - chrges.point.X)*chrges.is_positive
+        y_dif = (current_point.Y - chrges.point.Y)*chrges.is_positive
         vector_norm = __calculate_vector_norm(x_dif,y_dif)
         x_direction = x_dif / vector_norm
         y_direction = y_dif / vector_norm
+        print(chrges.is_positive)
         force = __calculate_force_to_vector(vector_norm,chrges.is_positive)
         list_dif_x.append(x_direction*force)
         list_dif_y.append(y_direction*force)
@@ -42,10 +43,15 @@ def __calculate_vector_norm(x_dif, y_dif):
 
 
 def __calculate_force_to_vector(vector_norm,is_positive):
+    print(is_positive)
     if is_positive == -1:
-    	return 0.5
+    	return 1
 
+    
     eps = 0.8
     Q = 1
     r = vector_norm
-    return (1 * Q) / (4 * math.pi * eps * r)
+    if r < 0.1:
+        return 1000
+     
+    return 1000

@@ -1,4 +1,5 @@
 import math
+from time import sleep
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -6,6 +7,7 @@ import point
 import charg
 import vector_calculating
 import filed_data
+
 
 
 negative_el_list = filed_data.get_negative_el_list()
@@ -29,7 +31,8 @@ def generate_field():
 
     __vector_field_generator(x_points, y_points)
     __draw_electric_charge()
-    plt.show()
+    plt.draw()
+    plt.pause(0.3)
 
 
 def __draw_electric_charge():
