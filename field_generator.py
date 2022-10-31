@@ -4,18 +4,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 import point
 import charg
+import vector_calculating
+import filed_data
 
-negative_el_list = [charg.Charg(point.Point(0.5,0),-1),charg.Charg(point.Point(1.5,1),-1),charg.Charg(point.Point(-1,1),-1)]
-positive_el_list = [charg.Charg(point.Point(-0.5,0),1),charg.Charg(point.Point(-1.5,1),1),charg.Charg(point.Point(0,1),1),charg.Charg(point.Point(0,1),1)]
-# negative_el_list  = [charg.Charg(point.Point(0.5,0),-1)]
-# positive_el_list = [charg.Charg(point.Point(-0.5,0),1)]
 
-charg_list = negative_el_list + positive_el_list
+negative_el_list = filed_data.get_negative_el_list()
+positive_el_list = filed_data.get_positive_el_list()
+charg_list = filed_data.get_charg_list()
+x_range = filed_data.get_x_renge()
+y_range = filed_data.get_y_renge()
+squer_size = filed_data.get_squer_size()
+step = filed_data.get_squer_size() / 2
 ax = plt.gca()
-x_range = 3
-y_range = 3
-squer_size = 0.2
-step = squer_size / 2
 
 
 def generate_field():
@@ -40,33 +40,6 @@ def __draw_electric_charge():
         plt.plot(positive.point.X, positive.point.Y, 'ro')
 
 
-def __calculate_vector(destination_point):
-
-    list_dif_x = []
-    list_dif_y = []
-    for chrges in charg_list:
-        x_dif = (destination_point.X - chrges.point.X)*chrges.is_positive
-        y_dif = (destination_point.Y - chrges.point.Y)*chrges.is_positive
-        vector_norm = __calculate_vector_norm(x_dif,y_dif)
-        x_direction = x_dif / vector_norm
-        y_direction = y_dif / vector_norm
-        force = __calculate_force_to_vector(vector_norm,chrges.is_positive)
-        list_dif_x.append(x_direction*force)
-        list_dif_y.append(y_direction*force)
-
-
-    sum_x = sum(list_dif_x)
-    sum_y = sum(list_dif_y)
-    
-    if(abs(sum_x) > squer_size*0.6 ):
-        sum_x = (abs(sum_x)/sum_x)* squer_size*0.6
-
-    if(abs(sum_y) > squer_size*0.6 ):
-        sum_y = (abs(sum_y)/sum_y)* squer_size*0.6
-
-    dif = [sum_x,sum_y]
-    return dif
-
 
 def __vector_field_generator(x_points, y_points):
     tempX = []
@@ -79,7 +52,7 @@ def __vector_field_generator(x_points, y_points):
             Y = y_p
             tempX = np.append(tempX, [X])
             tempY = np.append(tempY, [Y])
-            direction = __calculate_vector(point.Point(X, Y))
+            direction = vector_calculating.calculate_vector(point.Point(X, Y))
             dif_x = direction[0]
             dif_y = direction[1]
             a = np.array([[dif_x, dif_y]])
@@ -89,20 +62,3 @@ def __vector_field_generator(x_points, y_points):
     origin = np.append(origin, (tempX, tempY), axis=1)
     plt.quiver(*origin, V[:, 0], V[:, 1], scale=8)
 
-
-def __calculate_force_to_vector(vector_norm,is_positive):
-    if is_positive == -1:
-    	return 0.5
-    	
-    eps = 0.8
-    Q = 1
-    r = vector_norm
-    return (1 * Q) / (4 * math.pi * eps * r)
-
-
-def __calculate_distance_point_to_point(start_point, stop_point):
-    return math.sqrt((stop_point.X - start_point.X) ** 2 + (stop_point.Y - start_point.Y) ** 2)
-
-
-def __calculate_vector_norm(x_dif, y_dif):
-    return math.sqrt(x_dif ** 2 + y_dif ** 2)
