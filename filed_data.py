@@ -3,9 +3,9 @@ import charg
 
 
 
-__destination_point = point.Point(0.5,0)
+__destination_point = point.Point(0,-1)
 __negative_el_list = [charg.Charg(__destination_point,-1)]
-# __positive_el_list = [charg.Charg(point.Point(-0.5,0),1),charg.Charg(point.Point(-1.5,1),1),charg.Charg(point.Point(0,1),1),charg.Charg(point.Point(0,1),1)]
+# __positive_el_list = [charg.Charg(point.Point(-0.5,0),1)]
 # negative_el_list  = [charg.Charg(point.Point(0.5,0),-1)]
 __positive_el_list = []
 
@@ -24,11 +24,12 @@ def get_negative_el_list():
     return __negative_el_list
 
 def get_positive_el_list():
-    x = -0.5
-    for i in range(10):
-        y = x*x
+    x = -0.7
+    for i in range(15):
+        y = 3*x*x*x*x
         temp = charg.Charg(point.Point(x,y),1)
         __positive_el_list.append(temp)
+        __charg_list.append(temp)
         x = x + 0.1
     return __positive_el_list
 

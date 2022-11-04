@@ -18,7 +18,6 @@ def calculate_vector(current_point):
         vector_norm = __calculate_vector_norm(x_dif,y_dif)
         x_direction = x_dif / vector_norm
         y_direction = y_dif / vector_norm
-        print(chrges.is_positive)
         force = __calculate_force_to_vector(vector_norm,chrges.is_positive)
         list_dif_x.append(x_direction*force)
         list_dif_y.append(y_direction*force)
@@ -43,15 +42,17 @@ def __calculate_vector_norm(x_dif, y_dif):
 
 
 def __calculate_force_to_vector(vector_norm,is_positive):
-    print(is_positive)
-    if is_positive == -1:
-    	return 1
-
     
-    eps = 0.8
-    Q = 1
+    Q_plus = 0.1
+    Q_minus = 15
     r = vector_norm
-    if r < 0.1:
-        return 1000
-     
-    return 1000
+
+    if is_positive == -1:
+        return (Q_minus)/(r*r)
+    else:
+        if r < 0.3:
+            return 100
+        return (Q_plus)/(r*r)
+    
+
+
