@@ -12,8 +12,8 @@ __positive_el_list = []
 
 __charg_list = __negative_el_list + __positive_el_list
 
-__x_range = 3
-__y_range = 3
+__x_range = 2
+__y_range = 2
 __squer_size = 0.2
 
 
