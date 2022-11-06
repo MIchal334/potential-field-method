@@ -7,6 +7,7 @@ import vector_calculating
 import matplotlib.pyplot as plt
 import field_generator
 import numpy as np
+
 class move_generator:
     __destination_point = point.Point(0,0)
     __current_position = point.Point(0,0)
@@ -24,10 +25,11 @@ class move_generator:
     def move(self):
         
         while True:
+       
             plt.plot(self.__current_position.X, self.__current_position.Y, 'go')
             dif = vector_calculating.calculate_vector(self.__current_position)
+            filed_data.update_last_visited_points(self.__current_position.X, self.__current_position.Y)
             self.__current_position.update_by_vector(dif)
-           
             field_generator.generate_field()
 
             if (abs(self.__current_position.X - self.__destination_point.X) < self.__err and abs(self.__current_position.Y - self.__destination_point.Y) < self.__err):
