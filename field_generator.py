@@ -31,8 +31,9 @@ def generate_field():
 
     __vector_field_generator(x_points, y_points)
     __draw_electric_charge()
-    plt.draw()
-    plt.pause(0.3)
+    plt.show()
+    # plt.draw()
+    # plt.pause(0.3)
 
 
 def __draw_electric_charge():

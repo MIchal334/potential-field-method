@@ -5,13 +5,14 @@ from http.client import IM_USED
 import filed_data
 import math
 
-charg_list = filed_data.get_charg_list()
+
 squer_size = filed_data.get_squer_size()
 
 
 def calculate_vector(current_point):
     list_dif_x = []
     list_dif_y = []
+    charg_list = filed_data.get_charg_list()
     for chrges in charg_list:
         x_dif = (current_point.X - chrges.point.X)*chrges.is_positive
         y_dif = (current_point.Y - chrges.point.Y)*chrges.is_positive
@@ -43,12 +44,12 @@ def __calculate_vector_norm(x_dif, y_dif):
 
 def __calculate_force_to_vector(vector_norm,is_positive):
     
-    Q_plus = 0.1
-    Q_minus = 15
+    Q_plus = 0.2
+    Q_minus = 10
     r = vector_norm
 
     if is_positive == -1:
-        return (Q_minus)/(r*r)
+        return (Q_minus)
     else:
         if r < 0.3:
             return 100
