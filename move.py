@@ -11,7 +11,7 @@ import numpy as np
 class move_generator:
     __destination_point = point.Point(0,0)
     __current_position = point.Point(0,0)
-    __err =0.15
+    __err =0.2
     def __init__(self):
         # __x_c = 2*filed_data.get_x_renge()*random.random() - filed_data.get_x_renge()
         # __y_c = 2*filed_data.get_y_renge()*random.random() - filed_data.get_y_renge()

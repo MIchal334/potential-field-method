@@ -34,7 +34,6 @@ def generate_field():
     __draw_electric_charge()
     plt.draw()
     plt.pause(0.3)
-    # plt.show()
 
 def __draw_electric_charge():
     for negative in negative_el_list:

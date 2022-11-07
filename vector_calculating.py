@@ -4,7 +4,6 @@ import math
 
 charg_list = filed_data.get_charg_list()
 squer_size = filed_data.get_squer_size()
-additiona_charges = filed_data.get_last_visited_list()
 dictinary_of_point_potential = {} 
 
 
@@ -52,8 +51,8 @@ def calculate_vector(current_point):
     if(abs(sum_x) > squer_size ):
         sum_x = (abs(sum_x)/sum_x)* squer_size
 
-    if(abs(sum_y) > squer_size ):
-        sum_y = (abs(sum_y)/sum_y)* squer_size
+    if(abs(sum_y) > squer_size):
+        sum_y = (abs(sum_y)/sum_y)* squer_size 
 
     dif = [sum_x,sum_y]
     return dif
