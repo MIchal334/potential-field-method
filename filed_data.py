@@ -9,7 +9,7 @@ __negative_el_list = [charg.Charg(__destination_point,-1)]
 # negative_el_list  = [charg.Charg(point.Point(0.5,0),-1)]
 __positive_el_list = []
 __last_visited_point = {}
-
+__aditionall_positive_list = []
 
 __charg_list = __negative_el_list + __positive_el_list
 
@@ -34,6 +34,12 @@ def create_positive_shape():
         __update_positive_list(x,y)
         x = x + 0.1
 
+
+def update_additiona_positive_list(x,y):
+    temp = charg.Charg(point.Point(x,y),1)
+    __aditionall_positive_list.append(temp)
+    if len(__aditionall_positive_list) > 5:
+        __aditionall_positive_list.pop(0)
 
 def __update_positive_list(x,y):
         temp = charg.Charg(point.Point(x,y),1)
@@ -70,3 +76,6 @@ def get_squer_size():
 
 def get_add_constans():
     return __additional_constns_of_visited_points
+
+def get_aditiona_positice():
+    return __aditionall_positive_list

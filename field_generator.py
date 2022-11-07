@@ -12,6 +12,7 @@ import filed_data
 
 negative_el_list = filed_data.get_negative_el_list()
 positive_el_list = filed_data.get_positive_el_list()
+additional_positive = filed_data.get_aditiona_positice()
 charg_list = filed_data.get_charg_list()
 x_range = filed_data.get_x_renge()
 y_range = filed_data.get_y_renge()
@@ -33,7 +34,7 @@ def generate_field():
     __draw_electric_charge()
     plt.draw()
     plt.pause(0.3)
-
+    # plt.show()
 
 def __draw_electric_charge():
     for negative in negative_el_list:
@@ -41,6 +42,7 @@ def __draw_electric_charge():
 
     for positive in positive_el_list:
         plt.plot(positive.point.X, positive.point.Y, 'ro')
+    
 
 
 

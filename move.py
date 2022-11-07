@@ -25,13 +25,13 @@ class move_generator:
     def move(self):
         
         while True:
-       
-            plt.plot(self.__current_position.X, self.__current_position.Y, 'go')
+    
             dif = vector_calculating.calculate_vector(self.__current_position)
-            filed_data.update_last_visited_points(self.__current_position.X, self.__current_position.Y)
             self.__current_position.update_by_vector(dif)
+            plt.plot(self.__current_position.X, self.__current_position.Y, 'go')
             field_generator.generate_field()
-
+            filed_data.update_additiona_positive_list(self.__current_position.X, self.__current_position.Y)
+            
             if (abs(self.__current_position.X - self.__destination_point.X) < self.__err and abs(self.__current_position.Y - self.__destination_point.Y) < self.__err):
                 break
 
