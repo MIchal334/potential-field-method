@@ -27,11 +27,11 @@ def calculate_vector(current_point):
     sum_x = sum(list_dif_x)
     sum_y = sum(list_dif_y)
     
-    if(abs(sum_x) > squer_size*0.6 ):
-        sum_x = (abs(sum_x)/sum_x)* squer_size*0.6
+    if(abs(sum_x) > squer_size*0.8):
+        sum_x = (abs(sum_x)/sum_x)* squer_size*0.8
 
-    if(abs(sum_y) > squer_size*0.6 ):
-        sum_y = (abs(sum_y)/sum_y)* squer_size*0.6
+    if(abs(sum_y) > squer_size*0.8 ):
+        sum_y = (abs(sum_y)/sum_y)* squer_size*0.8
 
     dif = [sum_x,sum_y]
     return dif
@@ -45,7 +45,7 @@ def __calculate_vector_norm(x_dif, y_dif):
 def __calculate_force_to_vector(vector_norm,is_positive):
     
     Q_plus = 0.2
-    Q_minus = 10
+    Q_minus = 4
     r = vector_norm
 
     if is_positive == -1:
