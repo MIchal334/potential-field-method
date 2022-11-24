@@ -41,8 +41,7 @@ def __calculate_vector_norm(x_dif, y_dif):
 
 
 
-def __calculate_force_to_vector(vector_norm,is_positive):
-    
+def __calculate_force_to_vector(vector_norm,is_positive):    
     Q_plus = 0.1
     Q_minus = 15
     r = vector_norm
