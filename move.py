@@ -27,17 +27,16 @@ class move_generator:
 
     def move(self):
 
-    
-        
         while True:
             plt.plot(self.__current_position.X, self.__current_position.Y, 'go')
             dif = vector_calculating.calculate_vector(self.__current_position)
             self.__current_position.update_by_vector(dif)
             field_generator.generate_field()
-            zero_potential_points = checker.check_filed(0.5,self.__current_position)
+            zero_potential_points = checker.check_filed(0.75,self.__current_position)
             print("ZNALEZIONO N PUNKOTOW N = ",len(zero_potential_points))
             for pt in zero_potential_points:
-                plt.plot(pt.X, pt.Y, 'go')
+                filed_data.updata_additional_positive_list(pt)
+
 
             plt.draw()
             plt.pause(0.3)

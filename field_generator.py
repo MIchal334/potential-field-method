@@ -36,10 +36,14 @@ def generate_field():
 
 
 def __draw_electric_charge():
+    additional_list = filed_data.get_additional_list()
     for negative in negative_el_list:
         plt.plot(negative.point.X, negative.point.Y, 'bo')
 
     for positive in positive_el_list:
+        plt.plot(positive.point.X, positive.point.Y, 'ro')
+    
+    for positive in additional_list:
         plt.plot(positive.point.X, positive.point.Y, 'ro')
 
 

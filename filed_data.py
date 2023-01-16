@@ -8,6 +8,7 @@ __negative_el_list = [charg.Charg(__destination_point,-1)]
 # __positive_el_list = [charg.Charg(point.Point(-0.5,0),1)]
 # negative_el_list  = [charg.Charg(point.Point(0.5,0),-1)]
 __positive_el_list = []
+__aditional_positve_list = []
 
 
 __charg_list = __negative_el_list + __positive_el_list
@@ -31,7 +32,13 @@ def get_positive_el_list():
         __positive_el_list.append(temp)
         __charg_list.append(temp)
         x = x + 0.1
-    return __positive_el_list
+    return (__positive_el_list)
+
+
+def updata_additional_positive_list(point):
+    if(__check_additional_list(point)):
+        __aditional_positve_list.append(charg.Charg(point,1))
+        __charg_list.append(charg.Charg(point,1))
 
 def get_charg_list():
     return __charg_list
@@ -46,3 +53,12 @@ def get_y_renge():
 def get_squer_size():
     return __squer_size
 
+def __check_additional_list(point):
+    for c in __aditional_positve_list:
+        if (abs(c.point.X - point.X) < 0.1) and (abs(c.point.Y - point.Y) < 0.1):
+            return False 
+
+    return True
+
+def get_additional_list():
+    return __aditional_positve_list

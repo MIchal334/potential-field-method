@@ -17,7 +17,7 @@ def check_filed(radius, central_point):
             temp_point = point.Point(i,j)
             move_vector = vc.calculate_vector(temp_point)
             norm = math.sqrt(move_vector[0]**2 + move_vector[1]**2)
-            if norm <= 0.05:
+            if norm <= 0.005:
                 zero_potential.append(temp_point)
 
     return zero_potential
