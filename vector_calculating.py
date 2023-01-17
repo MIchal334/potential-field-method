@@ -41,9 +41,8 @@ def __calculate_vector_norm(x_dif, y_dif):
 
 
 def __calculate_force_to_vector(vector_norm,is_positive):
-    
-    Q_plus = 0.15
-    Q_minus = 2
+    Q_plus = 0.1
+    Q_minus = 2.5
     r = vector_norm
 
     if is_positive == -1:

@@ -18,8 +18,8 @@ class move_generator:
     def __init__(self):
         # __x_c = 2*filed_data.get_x_renge()*random.random() - filed_data.get_x_renge()
         # __y_c = 2*filed_data.get_y_renge()*random.random() - filed_data.get_y_renge()
-        __x_c = 0
-        __y_c = 2
+        __x_c = 0.5
+        __y_c = 1.8
         self.__current_position = point.Point(__x_c,__y_c)
         self.__destination_point = filed_data.get_destination_point()
     
