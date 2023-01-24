@@ -26,22 +26,22 @@ class move_generator:
 
 
     def move(self):
+        pass
+        # while True:
+        #     plt.plot(self.__current_position.X, self.__current_position.Y, 'go')
+        #     dif = vector_calculating.calculate_vector(self.__current_position)
+        #     self.__current_position.update_by_vector(dif)
+        #     field_generator.generate_field()
+        #     zero_potential_points = checker.check_filed(0.75,self.__current_position)
+        #     print("ZNALEZIONO N PUNKOTOW N = ",len(zero_potential_points))
+        #     for pt in zero_potential_points:
+        #         filed_data.updata_additional_positive_list(pt)
 
-        while True:
-            plt.plot(self.__current_position.X, self.__current_position.Y, 'go')
-            dif = vector_calculating.calculate_vector(self.__current_position)
-            self.__current_position.update_by_vector(dif)
-            field_generator.generate_field()
-            zero_potential_points = checker.check_filed(0.75,self.__current_position)
-            print("ZNALEZIONO N PUNKOTOW N = ",len(zero_potential_points))
-            for pt in zero_potential_points:
-                filed_data.updata_additional_positive_list(pt)
 
-
-            plt.draw()
-            plt.pause(0.3)
-            if (abs(self.__current_position.X - self.__destination_point.X) < self.__err and abs(self.__current_position.Y - self.__destination_point.Y) < self.__err):
-                break
+        #     plt.draw()
+        #     plt.pause(0.3)
+        #     if (abs(self.__current_position.X - self.__destination_point.X) < self.__err and abs(self.__current_position.Y - self.__destination_point.Y) < self.__err):
+        #         break
 
 
 

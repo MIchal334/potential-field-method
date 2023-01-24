@@ -4,11 +4,13 @@ import charg
 
 
 __destination_point = point.Point(0,-1)
+__test_point = point.Point(0,1)
 __negative_el_list = [charg.Charg(__destination_point,-1)]
 # __positive_el_list = [charg.Charg(point.Point(-0.5,0),1)]
 # negative_el_list  = [charg.Charg(point.Point(0.5,0),-1)]
 __positive_el_list = []
-__aditional_positve_list = []
+__aditional_positve_list = [charg.Charg(__test_point,1)]
+# __aditional_positve_list = []
 
 
 __charg_list = __negative_el_list + __positive_el_list
@@ -26,19 +28,19 @@ def get_negative_el_list():
 
 def get_positive_el_list():
     x = -0.7
-    for i in range(15):
-        y = 3*x*x*x*x
-        temp = charg.Charg(point.Point(x,y),1)
-        __positive_el_list.append(temp)
-        __charg_list.append(temp)
-        x = x + 0.1
+    # for i in range(15):
+    #     y = 3*x*x*x*x
+    #     temp = charg.Charg(point.Point(x,y),1)
+    #     __positive_el_list.append(temp)
+    #     __charg_list.append(temp)
+    #     x = x + 0.1
     return (__positive_el_list)
 
 
 def updata_additional_positive_list(point):
     if(__check_additional_list(point)):
         __aditional_positve_list.append(charg.Charg(point,1))
-        __charg_list.append(charg.Charg(point,1))
+        # __charg_list.append(charg.Charg(point,1))
 
 def get_charg_list():
     return __charg_list

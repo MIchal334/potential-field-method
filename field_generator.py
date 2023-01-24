@@ -32,7 +32,7 @@ def generate_field():
     __vector_field_generator(x_points, y_points)
     __draw_electric_charge()
     plt.draw()
-    plt.pause(0.3)
+    plt.pause(20)
 
 
 def __draw_electric_charge():
@@ -44,7 +44,7 @@ def __draw_electric_charge():
         plt.plot(positive.point.X, positive.point.Y, 'ro')
     
     for positive in additional_list:
-        plt.plot(positive.point.X, positive.point.Y, 'ro')
+        plt.plot(positive.point.X, positive.point.Y, 'yo')
 
 
 
