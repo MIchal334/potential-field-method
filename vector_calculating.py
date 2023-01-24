@@ -88,11 +88,12 @@ def __calculate_force_to_vector(vector_norm,is_positive):
     
 
 def rotate_vector(magnetic_charge,point):
+    scale = -1
     Vx = (magnetic_charge.X - point.X)
     Vy = (magnetic_charge.Y - point.Y)
     R = math.sqrt(Vx**2 + Vy**2)
     alfa = math.atan2(Vy,Vx)
-    rotate = -0.5*math.cos(alfa)*(1/R)
+    rotate = scale*math.sin(alfa)*(math.pi/2)
 
     return rotate
 
