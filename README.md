@@ -12,7 +12,7 @@ On branch "book_solver2" is implemented method with "additional negative charges
 After this is  add tepmorary target on a straight line perpendicular to the line on which he retreated and again after "n" steps new target is added but in this case the line
 should goes through the point witch minumum was detected. After "n" steps the main target is active agian.
 
-This methods have implemented and tested in ROS. My prestntations form study classes and tests in ROS you can see in this link: 
+This methods have implemented and tested in ROS. My prestntations form study classes and tests in ROS you can see in this link: [r2h]: https://drive.google.com/drive/folders/1IMD-HED_wMd5_c2RX1s3T0hzLoTI0CdE?usp=sharing
 
 Technology:
 Python, ROS, Matplotlib
